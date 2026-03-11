@@ -7,3 +7,10 @@
  * The following tutorial has a solution for this problem:
  * https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-correlated-subquery/
  */
+SELECT film_id, title
+FROM film
+WHERE rental_rate > (
+	SELECT SUM(rental_rate) / count(DISTINCT film_id) 
+	FROM film
+	)
+ORDER BY title;
